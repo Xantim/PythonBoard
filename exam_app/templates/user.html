@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href='/quotes'>Back</a>
+    <a href="/logout">Log out</a>
+    <h1>{{username.first_name}} {{username.last_name}}'s Quotes</h1>
+
+    {% for quote in user.quotes_uploaded.all %}
+        <li>quote is {{quote.desc}}</li>
+        {% endfor %}
+    
+</body>
+</html>

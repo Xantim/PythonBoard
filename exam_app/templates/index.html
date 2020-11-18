@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quote Dash Login</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class='container'>
+        <div class='left_block'>
+            <div class='registration'>
+                <h1>Registration</h1>
+
+                {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+
+                <form action='/register' method="POST">
+                    {% csrf_token %}
+                    <ul>
+                        <li>First Name: <input name='first_name' type='text'></li>
+                        <li>Last Name: <input name='last_name' type='text'></li>
+                        <li>Email: <input name='email' type='text'></li>
+                        <li>Password: <input name='password' type='text'></li>
+                        <li>Confirm Password: <input name='password_confirm' type='text'></li>
+                    </ul>
+                    <br>
+                    <input type="submit" value="Register">
+
+                </form>
+            </div>
+            <div class='right_block'>
+                <div class='login'>
+                    <h1>Login</h1>
+
+                    <form action='/login' method="POST">
+                        {% csrf_token %}
+                        <ul>
+                            <li>Email: <input name='email' type='text'></li>
+                            <li>Password: <input name='password' type='text'></li>
+                        </ul>
+                        <br>
+                        <input type="submit" value="Login">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

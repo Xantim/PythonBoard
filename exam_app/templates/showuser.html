@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href='/quotes'>Back</a>
+
+    
+    <p>quotes uploaded by {{usertoshow.first_name}}</p>
+    <br>
+    {% for quotes in usertoshow.quotes_uploaded.all %}
+    <p>{{quotes.desc}} <p>{{quotes.author}}</p>
+    <br>
+
+    {%endfor%}
+</body>
+</html>

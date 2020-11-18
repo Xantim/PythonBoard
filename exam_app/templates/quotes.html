@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+    <div class='container'>
+        <div class='top_block'>
+            <h1>Successful Login! Welcome {{username.first_name}} {{username.last_name}}</h1>
+
+            <a href='/account/{{username.id}}'>Edit Account</a>
+            <a href="/logout">Log out</a>
+        </div>
+
+        <div class='right_block'>
+            </p>
+            <!-- <a href='user/{{username.id}}'>user</a> -->
+            {% for user in all_the_quotes %}
+            {{user.author}}
+            <br>
+            {{user.desc}}
+            <br>
+
+            <p>Posted by
+                <!-- <a href='user/{{username.id}}'>quote_user</a>' -->
+                <a href='user/{{user.posted_by.id}}'>{{user.posted_by.first_name}} </p></a>
+            <p>likes here</p>
+            <br>
+            <form action='/quotes/{{user.id}}/delete' method="POST">
+                {%csrf_token%}
+                <input type="submit" value="delete">
+            </form>
+            {% endfor %}
+
+
+        </div>
+
+        <div class='left_block' <h1>Add a Quote</h1>
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            <form action='/add_quote' method="POST">
+                {% csrf_token %}
+                <ul>
+                    <li>Author: <input name='author' type='text'></li>
+                    <li>Desc: <input name='desc' type='text'></li>
+                </ul>
+                <br>
+                <input type="submit" value="Submit">
+            </form>
+
+
+
+        </div>
+    </div>
+</body>
+
+</html>

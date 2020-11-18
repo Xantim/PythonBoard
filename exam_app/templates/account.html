@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Welcome {{username.first_name}}</h1>
+    <h2>Edit My Account</h2>
+    <a href='/quotes'>Back</a>
+    <br>
+    <br>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    <form action='/account/{{username.id}}/edit' method="POST">
+        {%csrf_token%}
+        <label for="first_name">First Name</label>
+        <input name='first_name' type='text' value="{{username.first_name}}">
+        <br>
+        <label for="last_name">Last Name</label>
+        <input name='last_name' type='text' value="{{username.last_name}}"> 
+        <br> 
+        <label for="email">Email</label>
+        <input name='email' type='text' value="{{username.email}}">  
+
+        <input type="submit" value="Update">
+    </form>
+
+    
+    
+</body>
+</html>
